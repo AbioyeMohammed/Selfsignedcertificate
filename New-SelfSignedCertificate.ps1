@@ -1,4 +1,4 @@
-﻿function New-SelfSignedCertificate 
+function New-SelfSignedCertificate 
 {
     #Get your credentials stored in variable O365creds
     $cloudcred=Get-Credential
@@ -7,18 +7,16 @@
     #Install-Module AzureAD
     Connect-AzureAD -Credential $cloudcred
 
-    #Install-Module Azure -AllowClobber
-    #Import-Module Azure
+    #Import-Module AzureAD
     Connect-AzAccount -Credential $cloudcred
     
-    #Define variablescls
-
+    #Define variables
     $currentDate      = Get-Date
     $notbefore        = $currentDate.AddDays(0)
     $notAfter         = $currentDate.AddYears(10)
     $pfxCertPath      = "C:\AADAppPrincipalCertificate.pfx"
     $cerCertPath      = "C:\AADAppPrincipalCertificate.cer"
-    $pfxCertPassword  = "pass@word1"
+    $pfxCertPassword  = [System.Web.Security.Membership]::GeneratePassword(10,0)
 
 
 # create the self signed certificate - This certificate is signed with a private key that uniquely and positively identifies the holder of the certificate.
